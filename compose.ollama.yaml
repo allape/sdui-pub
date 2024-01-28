@@ -40,7 +40,7 @@ services:
               capabilities: [gpu]
               count: all
     volumes:
-      - ./ollama/app:/root/.ollama
+      - ./ollama/app:/root/.ollama:z
   webui:
     image: "ghcr.io/ollama-webui/ollama-webui:main"
     links:
@@ -52,7 +52,7 @@ services:
     environment:
       - OLLAMA_API_BASE_URL=http://app:11434/api
     volumes:
-      - ./ollama/webui:/app/backend/data
+      - ./ollama/webui:/app/backend/data:z
 
 networks:
   external:
