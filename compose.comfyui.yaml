@@ -1,0 +1,47 @@
+name: comfyui
+services:
+  proxy:
+    image: "tinyproxy"
+    networks:
+      - external
+      - internal
+    volumes:
+      - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf
+  nginx:
+    image: "nginx"
+    networks:
+      - external
+      - internal
+    depends_on:
+      - app
+    ports:
+      - 7861:7860
+      - 8081:8080
+    volumes:
+      - ./nginx.7860.conf:/etc/nginx/conf.d/nginx.7860.conf
+  app:
+    image: "comfyui:v1"
+    networks:
+      - internal
+    environment:
+      - http_proxy=http://proxy:8118
+      - https_proxy=http://proxy:8118
+      - no_proxy=localhost,127.0.0.0/8,172.0.0.0/8,192.0.0.0/8
+    volumes:
+      - ./data:/data:z
+      - ./models:/home/user/app/models:z
+    deploy:
+#      restart_policy:
+#        condition: on-failure
+#        delay: 5s
+#        max_attempts: 3
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              count: all
+networks:
+  external:
+  internal:
+    internal: true

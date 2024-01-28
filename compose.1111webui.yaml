@@ -1,0 +1,56 @@
+name: 1111webui
+services:
+  proxy:
+    image: "tinyproxy"
+    networks:
+      - external
+      - internal
+    volumes:
+      - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf
+  nginx:
+    image: "nginx"
+    networks:
+      - external
+      - internal
+    depends_on:
+      - app
+    ports:
+      - 7860:7860
+      - 8080:8080
+    volumes:
+      - ./nginx.7860.conf:/etc/nginx/conf.d/nginx.7860.conf
+  app:
+    image: "1111webui:v1"
+    networks:
+      - internal
+    environment:
+      - http_proxy=http://proxy:8118
+      - https_proxy=http://proxy:8118
+      - no_proxy=localhost,127.0.0.0/8,172.0.0.0/8,192.0.0.0/8
+    volumes:
+      - ./notification.mp3:/home/user/app/notification.mp3
+      - ./models/checkpoints:/home/user/app/models/Stable-diffusion:z
+      - ./models/vae:/home/user/app/models/VAE:z
+      - ./models/vae_approx:/home/user/app/models/VAE-approx:z
+      - ./models/karlo:/home/user/app/models/karlo:z
+      - ./models/loras:/home/user/app/models/Lora:z
+      - ./models/hypernetworks:/home/user/app/models/hypernetworks:z
+      - ./models/embeddings:/home/user/app/embeddings:z
+      - ./models/controlnet:/home/user/app/extensions/sd-webui-controlnet/models:z
+      - ./data:/home/user/app/outputs:z
+      - ./openai:/home/user/app/openai:z
+    deploy:
+#      restart_policy:
+#        condition: on-failure
+#        delay: 5s
+#        max_attempts: 3
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              count: all
+networks:
+  external:
+  internal:
+    internal: true

@@ -1,0 +1,60 @@
+name: ollama
+services:
+  proxy:
+    image: "tinyproxy"
+    networks:
+      - external
+      - internal
+    volumes:
+      - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf
+  nginx:
+    image: "nginx"
+    networks:
+      - external
+      - internal
+    depends_on:
+      - app
+      - webui
+    ports:
+      - 11434:11434
+      - 11435:11435
+    volumes:
+      - ./nginx.ollama.conf:/etc/nginx/conf.d/ollama.conf
+  app:
+    image: "ollama/ollama"
+    networks:
+      - internal
+    environment:
+      - http_proxy=http://proxy:8118
+      - https_proxy=http://proxy:8118
+      - no_proxy=localhost,127.0.0.0/8,172.0.0.0/8,192.0.0.0/8
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              count: all
+    volumes:
+      - ./ollama/app:/root/.ollama
+  webui:
+    image: "ghcr.io/ollama-webui/ollama-webui:main"
+    links:
+      - app
+    networks:
+      - internal
+    depends_on:
+      - app
+    environment:
+      - OLLAMA_API_BASE_URL=http://app:11434/api
+    volumes:
+      - ./ollama/webui:/app/backend/data
+
+networks:
+  external:
+  internal:
+    internal: true
