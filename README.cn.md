@@ -40,7 +40,7 @@ docker build -t tinyproxy:latest -f v1.tinyproxy.Dockerfile .
 #docker exec -it tinyproxy bash
 unset http_proxy
 docker rm -f tinyproxy
-docker run -d -p 8119:8118 --name tinyproxy tinyproxy:latest
+docker run -d -p 8119:8118 --name tinyproxy -v "$(pwd)/tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf" tinyproxy:latest
 curl -v duckduckgo.com
 export http_proxy=http://127.0.0.1:8119
 curl -v duckduckgo.com
