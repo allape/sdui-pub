@@ -3,9 +3,9 @@ FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=America/Los_Angeles
 
-ARG http_proxy
-ARG https_proxy
-ARG no_proxy
+ARG http_proxy=""
+ARG https_proxy=""
+ARG no_proxy=""
 
 ARG PYTHON_VERSION=3.10.12
 

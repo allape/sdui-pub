@@ -23,29 +23,11 @@ StableDiffusion UI in Docker
 ## [tinyproxy](https://github.com/tinyproxy/tinyproxy)
 
 ```shell
-# tinyproxy can NOT handle \r in config file
+# tinyproxy can NOT handle `\r` in config file,
 # run next command in Git Bash to parse config file on Windows
 #dos2unix tinyproxy.conf
-export proxy_host=proxy.lan:1080 # replace with the host of your proxy server: ONLY THE HOST, no protocol
-docker build -t tinyproxy:latest -f v1.tinyproxy.Dockerfile \
-       --build-arg "tinyproxy_http_upstream=$proxy_host" \
-       --build-arg "http_proxy=http://$proxy_host" \
-       --build-arg "https_proxy=http://$proxy_host" \
-       --build-arg no_proxy=localhost,127.0.0.0/8,172.0.0.0/8,192.0.0.0/8 \
-       .
-```
 
-#### Test proxy server
-
-```shell
-#docker exec -it tinyproxy bash
-unset http_proxy
-docker rm -f tinyproxy
-docker run -d -p 8119:8118 -p 8080:80 --name tinyproxy tinyproxy:latest
-curl -v duckduckgo.com
-export http_proxy=http://127.0.0.1:8119
-curl -v duckduckgo.com
-docker rm -f tinyproxy
+docker build -t tinyproxy:latest -f v1.tinyproxy.Dockerfile .
 ```
 
 ## [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
@@ -53,9 +35,6 @@ docker rm -f tinyproxy
 ```shell
 docker build -t 1111webui:v1 -f v1.1111webui.Dockerfile .
 git clone https://huggingface.co/openai/clip-vit-large-patch14 openai/clip-vit-large-patch14
-# after container is started, 
-#   an extension will try to install dependencies, 
-#   and this requires network to work properly
 docker compose -f compose.1111webui.yaml up -d
 ```
 
@@ -80,7 +59,7 @@ docker compose -f compose.ollama.yaml up -d
         docker build \
                --build-arg "http_proxy=http://$proxy_host" \
                --build-arg "https_proxy=http://$proxy_host" \
-               --build-arg no_proxy=localhost,127.0.0.0/8,172.0.0.0/8,192.0.0.0/8 \
+               --build-arg no_proxy=localhost,127.0.0.1 \
                --progress=plain \
                -t image:tag -f Dockerfile .
       ```
