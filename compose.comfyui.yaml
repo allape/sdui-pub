@@ -16,7 +16,6 @@ services:
       - app
     ports:
       - 7861:7860
-      - 8081:8080
     volumes:
       - ./nginx.7860.conf:/etc/nginx/conf.d/nginx.7860.conf
   app:
