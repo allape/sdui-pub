@@ -34,6 +34,8 @@ services:
       - ./models/karlo:/home/user/app/models/karlo:z
       - ./models/loras:/home/user/app/models/Lora:z
       - ./models/hypernetworks:/home/user/app/models/hypernetworks:z
+      - ./models/SwinIR:/home/user/app/models/SwinIR:z
+      - ./models/LDSR:/home/user/app/models/LDSR:z
       - ./models/embeddings:/home/user/app/embeddings:z
       - ./models/controlnet:/home/user/app/extensions/sd-webui-controlnet/models:z
       - ./data:/home/user/app/outputs:z

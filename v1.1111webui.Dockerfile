@@ -49,7 +49,9 @@ RUN git clone --depth 1 https://github.com/Mikubill/sd-webui-controlnet.git exte
     . ./venv/bin/activate && \
     cd extensions/sd-webui-controlnet && \
     python3 -m pip install insightface -r requirements.txt
-RUN git clone --depth 1 https://github.com/pharmapsychotic/clip-interrogator-ext.git extensions/clip-interrogator-ext
+#RUN git clone --depth 1 https://github.com/pharmapsychotic/clip-interrogator-ext.git extensions/clip-interrogator-ext
+#RUN git clone --depth 1 https://github.com/zero01101/openOutpaint-webUI-extension
+#RUN git clone --depth 1 https://github.com/huchenlei/sd-webui-openpose-editor
 
 # Install dependencies of extensions
 RUN ./webui.sh --exit --skip-torch-cuda-test
