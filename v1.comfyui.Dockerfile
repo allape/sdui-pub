@@ -22,8 +22,10 @@ USER user
 ENV HOME=/home/user \
     PATH=/home/user/.local/bin:$PATH
 
-RUN git config --global http.proxy $http_proxy && \
-    git config --global https.proxy $https_proxy
+RUN test -n "$http_proxy" \
+    && git config --global http.proxy $http_proxy \
+    && git config --global https.proxy $https_proxy \
+    || exit 0
 
 # Pyenv
 RUN curl https://pyenv.run | bash

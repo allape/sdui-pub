@@ -25,8 +25,10 @@ ENV HOME=/home/user \
 
 WORKDIR $HOME/app
 
-RUN git config --global http.proxy $http_proxy && \
-    git config --global https.proxy $https_proxy
+RUN test -n "$http_proxy" \
+    && git config --global http.proxy $http_proxy \
+    && git config --global https.proxy $https_proxy \
+    || exit 0
 
 RUN python3 -m pip install --no-cache-dir --upgrade pip setuptools wheel
 
@@ -36,7 +38,8 @@ ARG PULL_OPENAI_MODELS=""
 # Main project
 RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git . && \
     python3 -m venv venv && \
-    echo "export TORCH_COMMAND=\"pip install xformers --no-cache-dir -r requirements.txt --extra-index-url https://download.pytorch.org/whl/$CUDA_VERSION\"" >> "webui-user.sh"
+    echo "export TORCH_COMMAND=\"pip install xformers --no-cache-dir -r requirements.txt --extra-index-url https://download.pytorch.org/whl/$CUDA_VERSION\"" >> "webui-user.sh" \
+    ./webui.sh --exit --skip-torch-cuda-test
 
 # CLIP model
 RUN test -n "$PULL_OPENAI_MODELS" && git clone https://huggingface.co/openai/clip-vit-large-patch14 openai/clip-vit-large-patch14 || exit 0
@@ -46,8 +49,9 @@ RUN git clone --depth 1 https://github.com/Mikubill/sd-webui-controlnet.git exte
     . ./venv/bin/activate && \
     cd extensions/sd-webui-controlnet && \
     python3 -m pip install insightface -r requirements.txt
+RUN git clone --depth 1 https://github.com/pharmapsychotic/clip-interrogator-ext.git extensions/clip-interrogator-ext
 
-# Install all dependencies
+# Install dependencies of extensions
 RUN ./webui.sh --exit --skip-torch-cuda-test
 
 RUN git config --global --unset http.proxy && \
