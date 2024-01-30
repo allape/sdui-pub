@@ -7,8 +7,9 @@ services:
       - internal
     volumes:
       - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf
-  nginx:
-    image: "nginx"
+  http:
+#    image: "nginx"
+    image: "caddy"
     networks:
       - external
       - internal
@@ -17,7 +18,8 @@ services:
     ports:
       - 7861:7860
     volumes:
-      - ./nginx.7860.conf:/etc/nginx/conf.d/nginx.7860.conf
+#      - ./nginx.sdui.conf:/etc/nginx/conf.d/nginx.sdui.conf
+      - ./caddy.sdui.Caddyfile:/etc/caddy/Caddyfile
   app:
     image: "comfyui:v1"
     networks:

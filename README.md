@@ -64,10 +64,10 @@ docker compose -f compose.ollama.yaml up -d
                -t image:tag -f Dockerfile .
       ```
 - Failed to install NVIDIA CUDA driver
-  - Find out the modules that were failed to install on the Installation Summary Dialog
-  - Then rerun the installer, and uncheck the modules that were failed to install.
-    And at the same time, download the modules from NVIDIA developer website and install them manually.
-  - For me, I failed to install `nsight-compute`. After all above steps, Everything works fine.
+    - Find out the modules that were failed to install on the Installation Summary Dialog
+    - Then rerun the installer, and uncheck the modules that were failed to install.
+      And at the same time, download the modules from NVIDIA developer website and install them manually.
+    - For me, I failed to install `nsight-compute`. After all above steps, Everything works fine.
 
 # Credits
 
@@ -77,5 +77,7 @@ docker compose -f compose.ollama.yaml up -d
 - [Ollama](https://github.com/ollama/ollama)
 - [tinyproxy](https://github.com/tinyproxy/tinyproxy)
 - [notification.mp3](https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/assets/notify.mp3)
+
 ---
+
 - [How does StableDiffusion work?](https://stable-diffusion-art.com/how-stable-diffusion-work/)

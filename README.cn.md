@@ -82,8 +82,8 @@ docker compose -f compose.ollama.yaml up -d
 # 常见问题
 
 - 如何在构建镜像过程中使用上游代理服务?
-  - 参考构建 tinyproxy 的过程, 在构建镜像时, 传入 `--build-arg` 参数即可
-  - ```shell
+    - 参考构建 tinyproxy 的过程, 在构建镜像时, 传入 `--build-arg` 参数即可
+    - ```shell
       export proxy_host=proxy.lan:1080
       docker build \
              --build-arg "http_proxy=http://$proxy_host" \
@@ -93,11 +93,11 @@ docker compose -f compose.ollama.yaml up -d
              -t image:tag -f Dockerfile .
     ```
 - 英伟达 CUDA 驱动安装失败
-  - 可能因为我的显卡比较老了, 安装 CUDA 的时候提示 nsight compute 什么什么的安装失败了.
-    所以在安装 CUDA 的时候, 选择自定义安装, 然后取消勾选 nsight compute, 先把 CUDA 其他模块安装完成.
-    然后再去英伟达官网下载 nsight compute 相关的安装包, 一顿安装, 就可以了.
-  - 因为我也不确定有没有 nsight compute 会不会对 pytorch 有影响, 反正现在能正常跑起来了.
-  - 出现类似问题的小伙伴也可以通过在`安装错误的结果页面`找到对应出错的模块, 按照上面的思路进行就好了.
+    - 可能因为我的显卡比较老了, 安装 CUDA 的时候提示 nsight compute 什么什么的安装失败了.
+      所以在安装 CUDA 的时候, 选择自定义安装, 然后取消勾选 nsight compute, 先把 CUDA 其他模块安装完成.
+      然后再去英伟达官网下载 nsight compute 相关的安装包, 一顿安装, 就可以了.
+    - 因为我也不确定有没有 nsight compute 会不会对 pytorch 有影响, 反正现在能正常跑起来了.
+    - 出现类似问题的小伙伴也可以通过在`安装错误的结果页面`找到对应出错的模块, 按照上面的思路进行就好了.
 
 # 词汇表
 
@@ -112,5 +112,7 @@ docker compose -f compose.ollama.yaml up -d
 - [Ollama](https://github.com/ollama/ollama)
 - [tinyproxy](https://github.com/tinyproxy/tinyproxy)
 - [notification.mp3](https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/assets/notify.mp3)
+
 ---
+
 - [How does StableDiffusion work?](https://stable-diffusion-art.com/how-stable-diffusion-work/)

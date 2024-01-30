@@ -7,8 +7,9 @@ services:
       - internal
     volumes:
       - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf
-  nginx:
-    image: "nginx"
+  http:
+#    image: "nginx"
+    image: "caddy"
     networks:
       - external
       - internal
@@ -19,7 +20,8 @@ services:
       - 11434:11434
       - 11435:11435
     volumes:
-      - ./nginx.ollama.conf:/etc/nginx/conf.d/ollama.conf
+#      - ./nginx.ollama.conf:/etc/nginx/conf.d/ollama.conf
+      - ./caddy.ollama.Caddyfile:/etc/caddy/Caddyfile
   app:
     image: "ollama/ollama"
     networks:
