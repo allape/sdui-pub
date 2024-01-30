@@ -38,6 +38,7 @@ services:
       - ./models/hypernetworks:/home/user/app/models/hypernetworks:z
       - ./models/SwinIR:/home/user/app/models/SwinIR:z
       - ./models/LDSR:/home/user/app/models/LDSR:z
+      - ./models/RealESRGAN:/home/user/app/models/RealESRGAN:z
       - ./models/embeddings:/home/user/app/embeddings:z
 #      - ./models/configs:/home/user/app/configs:z
       - ./models/controlnet:/home/user/app/extensions/sd-webui-controlnet/models:z
