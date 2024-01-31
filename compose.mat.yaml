@@ -1,0 +1,42 @@
+name: mat
+services:
+  proxy:
+    image: "tinyproxy"
+    networks:
+      - external
+      - internal
+    volumes:
+      - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf
+  http:
+    image: "caddy"
+    networks:
+      - external
+      - internal
+    depends_on:
+      - app
+    ports:
+      - 7862:7860
+    volumes:
+      - ./caddy.sdui.Caddyfile:/etc/caddy/Caddyfile
+  app:
+    image: "registry.hf.space/rothfeld-stable-diffusion-mat-outpainting-primer:latest"
+    command:
+      - python
+      - app.py
+    networks:
+      - internal
+    environment:
+      - http_proxy=http://proxy:8118
+      - https_proxy=http://proxy:8118
+      - no_proxy=localhost,127.0.0.1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              count: all
+networks:
+  external:
+  internal:
+    internal: true
