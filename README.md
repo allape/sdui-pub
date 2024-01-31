@@ -68,6 +68,15 @@ docker compose -f compose.ollama.yaml up -d
     - Then rerun the installer, and uncheck the modules that were failed to install.
       And at the same time, download the modules from NVIDIA developer website and install them manually.
     - For me, I failed to install `nsight-compute`. After all above steps, Everything works fine.
+- How backup container?
+    - ```shell
+      # Backup AUTOMATIC1111/stable-diffusion-webui
+      docker commit 1111webui-app-1 1111webui:v1
+      # Backup ComfyUI
+      docker commit comfyui-app-1 comfyui:v1
+      # Backup Ollama
+      docker commit ollama-app-1 ollama/ollama:latest
+      ```
 
 # Credits
 

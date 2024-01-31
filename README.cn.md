@@ -98,6 +98,15 @@ docker compose -f compose.ollama.yaml up -d
       然后再去英伟达官网下载 nsight compute 相关的安装包, 一顿安装, 就可以了.
     - 因为我也不确定有没有 nsight compute 会不会对 pytorch 有影响, 反正现在能正常跑起来了.
     - 出现类似问题的小伙伴也可以通过在`安装错误的结果页面`找到对应出错的模块, 按照上面的思路进行就好了.
+- 如何备份 Docker 容器? (因为更改配置之后重启 compose 会丢失原有容器内容)
+    - ```shell
+      # Backup AUTOMATIC1111/stable-diffusion-webui
+      docker commit 1111webui-app-1 1111webui:v1
+      # Backup ComfyUI
+      docker commit comfyui-app-1 comfyui:v1
+      # Backup Ollama
+      docker commit ollama-app-1 ollama/ollama:latest
+      ```
 
 # 词汇表
 
