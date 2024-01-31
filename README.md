@@ -20,6 +20,13 @@ StableDiffusion UI in Docker
 
 # Let's get started
 
+## Windows prelude
+
+```shell
+# Run this command before everything if you are using Windows
+git config --global core.autocrlf false
+```
+
 ## [tinyproxy](https://github.com/tinyproxy/tinyproxy)
 
 ```shell

@@ -20,7 +20,13 @@
 
 # 如何开始
 
-### 构建一个 [tinyproxy](https://github.com/tinyproxy/tinyproxy) 镜像
+## 在 Windows 上要干的事儿
+
+```shell
+git config --global core.autocrlf false
+```
+
+## 构建一个 [tinyproxy](https://github.com/tinyproxy/tinyproxy) 镜像
 
 因为使用 Docker 就是希望隔离 UI 项目, 避免其直接访问到互联网, 或被其污染主机环境
 
@@ -31,7 +37,7 @@
 docker build -t tinyproxy:latest -f v1.tinyproxy.Dockerfile .
 ```
 
-#### 测试 [tinyproxy](https://github.com/tinyproxy/tinyproxy) 代理服务器是否正常工作
+### 测试 [tinyproxy](https://github.com/tinyproxy/tinyproxy) 代理服务器是否正常工作
 
 如果需要上游代理的, 将 [tinyproxy.conf](tinyproxy.conf) 的最后一行, 取消注释, 并替换成你自己的代理地址即可;
 不需要上游代理的, 可以将下面的 [duckduckgo.com](https://duckduckgo.com) 替换成其他网站
