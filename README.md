@@ -92,6 +92,7 @@ docker compose -f compose.ollama.yaml up -d
 - [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 - [Ollama](https://github.com/ollama/ollama)
 - [tinyproxy](https://github.com/tinyproxy/tinyproxy)
+- [Caddy](https://github.com/caddyserver/caddy)
 - [notification.mp3](https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/assets/notify.mp3)
 
 ---
