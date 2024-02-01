@@ -40,10 +40,11 @@ services:
       - ./models/LDSR:/home/user/app/models/LDSR:z
       - ./models/RealESRGAN:/home/user/app/models/RealESRGAN:z
       - ./models/embeddings:/home/user/app/embeddings:z
-#      - ./models/configs:/home/user/app/configs:z
+      - ./models/configs:/home/user/app/configs:z
       - ./models/controlnet:/home/user/app/extensions/sd-webui-controlnet/models:z
       - ./data:/home/user/app/outputs:z
       - ./openai:/home/user/app/openai:z
+      - ./styles.csv:/home/user/app/styles.csv:z
     deploy:
 #      restart_policy:
 #        condition: on-failure
