@@ -44,7 +44,7 @@ services:
       - ./models/controlnet:/home/user/app/extensions/sd-webui-controlnet/models:z
       - ./data:/home/user/app/outputs:z
       - ./openai:/home/user/app/openai:z
-      - ./styles.csv:/home/user/app/styles.csv:z
+      - ./styles.csv:/home/user/app/styles.csv:rw
     deploy:
 #      restart_policy:
 #        condition: on-failure
