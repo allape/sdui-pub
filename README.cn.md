@@ -16,6 +16,7 @@
 
 - Intel Core i7-8700K
 - NVIDIA GeForce GTX 1060 6GB
+- NVIDIA GeForce RTX 4070 SUPER
 - 32GB DDR4 3200MHz
 
 # 如何开始
