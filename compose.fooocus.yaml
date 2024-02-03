@@ -1,0 +1,50 @@
+name: fooocus
+services:
+  proxy:
+    image: "tinyproxy"
+    networks:
+      - external
+      - internal
+    volumes:
+      - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf
+  http:
+    image: "caddy"
+    networks:
+      - external
+      - internal
+    depends_on:
+      - app
+    ports:
+      - 7866:7866
+    volumes:
+      - ./caddy.fooocus.Caddyfile:/etc/caddy/Caddyfile
+  app:
+    image: "fooocus:v1"
+    command:
+      - python3
+      - ./entry_with_update.py
+      - --listen
+      - --port
+      - "7866"
+      - --preset
+      - "${FOOOCUS_PRESET:-default}"
+    networks:
+      - internal
+    environment:
+      - http_proxy=http://proxy:8118
+      - https_proxy=http://proxy:8118
+      - no_proxy=localhost,127.0.0.1
+    volumes:
+      - ./fooocus/models:/home/user/app/models:z
+      - ./data:/home/user/app/outputs:z
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              count: all
+networks:
+  external:
+  internal:
+    internal: true

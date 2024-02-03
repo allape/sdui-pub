@@ -5,6 +5,7 @@ models
 openai
 data
 
+fooocus
 ollama
 
 styles.csv

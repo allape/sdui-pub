@@ -123,8 +123,9 @@ docker compose -f compose.ollama.yaml up -d
 # 感谢名单以及代码来源(Credits)
 
 - [ComfyUI Dockerfile](https://huggingface.co/spaces/SpacesExamples/ComfyUI/tree/main)
-- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
 - [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+- [Fooocus](https://github.com/lllyasviel/Fooocus)
 - [Ollama](https://github.com/ollama/ollama)
 - [tinyproxy](https://github.com/tinyproxy/tinyproxy)
 - [Caddy](https://github.com/caddyserver/caddy)

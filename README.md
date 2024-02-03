@@ -53,6 +53,32 @@ docker build -t comfyui:v1 -f v1.comfyui.Dockerfile .
 docker compose -f compose.comfyui.yaml up -d
 ```
 
+## [Fooocus](https://github.com/lllyasviel/Fooocus)
+
+```shell
+docker build -t fooocus:v1 -f v1.fooocus.Dockerfile .
+
+# You can ignore below commands if you have no will to mount `models` folder,
+#   because we need a fresh models folder to run properly.
+cd ..
+git clone https://github.com/lllyasviel/Fooocus.git
+cp -R Fooocus/models sdui/fooocus/
+cd sdui
+
+# --preset anime
+#export FOOOCUS_PRESET="anime"
+# --preset realistic
+#export FOOOCUS_PRESET="realistic"
+# --preset lcm
+#export FOOOCUS_PRESET="lcm"
+# --preset sai
+#export FOOOCUS_PRESET="sai"
+
+# --preset default
+export FOOOCUS_PRESET="default"
+docker compose -f compose.fooocus.yaml up -d
+```
+
 ## [Ollama](https://github.com/ollama/ollama)
 
 ```shell
@@ -82,6 +108,8 @@ docker compose -f compose.ollama.yaml up -d
       docker commit 1111webui-app-1 1111webui:v1
       # Backup ComfyUI
       docker commit comfyui-app-1 comfyui:v1
+      # Backup Fooocus
+      docker commit fooocus-app-1 fooocus:v1
       # Backup Ollama
       docker commit ollama-app-1 ollama/ollama:latest
       ```
@@ -89,8 +117,9 @@ docker compose -f compose.ollama.yaml up -d
 # Credits
 
 - [ComfyUI Dockerfile](https://huggingface.co/spaces/SpacesExamples/ComfyUI/tree/main)
-- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
 - [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+- [Fooocus](https://github.com/lllyasviel/Fooocus)
 - [Ollama](https://github.com/ollama/ollama)
 - [tinyproxy](https://github.com/tinyproxy/tinyproxy)
 - [Caddy](https://github.com/caddyserver/caddy)

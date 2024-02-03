@@ -59,4 +59,4 @@ RUN ./webui.sh --exit --skip-torch-cuda-test
 RUN git config --global --unset http.proxy && \
     git config --global --unset https.proxy
 
-CMD ["./webui.sh", "--no-download-sd-model", "--enable-insecure-extension-access", "--skip-torch-cuda-test", "--xformers", "--listen", "--port", "7860"]
+CMD ["./webui.sh", "--api", "--no-download-sd-model", "--enable-insecure-extension-access", "--skip-torch-cuda-test", "--xformers", "--listen", "--port", "7860"]
