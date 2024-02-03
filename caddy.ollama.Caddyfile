@@ -3,5 +3,5 @@
 }
 
 :11435 {
-    reverse_proxy app:8080
+    reverse_proxy webui:8080
 }
