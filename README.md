@@ -8,6 +8,7 @@ StableDiffusion UI in Docker
 
 # Drivers and Tools
 
+- [Docker](https://www.docker.com/)
 - [NVIDIA CUDA](https://developer.nvidia.com/cuda-downloads)
 - [WSL](https://learn.microsoft.com/en-us/windows/wsl/basic-commands)
 - [Download Git](https://git-scm.com/downloads)
@@ -116,6 +117,7 @@ docker compose -f compose.ollama.yaml up -d
 
 # Credits
 
+- [Docker](https://www.docker.com/)
 - [ComfyUI Dockerfile](https://huggingface.co/spaces/SpacesExamples/ComfyUI/tree/main)
 - [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 - [ComfyUI](https://github.com/comfyanonymous/ComfyUI)

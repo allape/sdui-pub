@@ -8,6 +8,7 @@
 
 # 需要下载的驱动和工具
 
+- [Docker](https://www.docker.com/)
 - [NVIDIA CUDA](https://developer.nvidia.com/cuda-downloads)
 - [WSL](https://learn.microsoft.com/en-us/windows/wsl/basic-commands)
 - [Download Git](https://git-scm.com/downloads)
@@ -78,6 +79,34 @@ docker build -t comfyui:v1 -f v1.comfyui.Dockerfile .
 docker compose -f compose.comfyui.yaml up -d
 ```
 
+## [Fooocus](https://github.com/lllyasviel/Fooocus)
+
+这是一个极简的 SDUI 项目, 要比 [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) 简单很多;
+但是, 与此同时, 也失去了很多自定义的功能
+
+```shell
+docker build -t fooocus:v1 -f v1.fooocus.Dockerfile .
+
+# 如果你不需要备份模型, 可以忽略下面的命令
+cd ..
+git clone https://github.com/lllyasviel/Fooocus.git
+cp -R Fooocus/models sdui/fooocus/
+cd sdui
+
+# --preset anime
+#export FOOOCUS_PRESET="anime"
+# --preset realistic
+#export FOOOCUS_PRESET="realistic"
+# --preset lcm
+#export FOOOCUS_PRESET="lcm"
+# --preset sai
+#export FOOOCUS_PRESET="sai"
+
+# --preset default
+export FOOOCUS_PRESET="default"
+docker compose -f compose.fooocus.yaml up -d
+```
+
 ## [Ollama](https://github.com/ollama/ollama)
 
 这不是一个 SD 的工程, 但是可以用来跑大语言模型, 正好 SDUI 的基础设施可以直接搭建构建这个镜像
@@ -111,6 +140,8 @@ docker compose -f compose.ollama.yaml up -d
       docker commit 1111webui-app-1 1111webui:v1
       # Backup ComfyUI
       docker commit comfyui-app-1 comfyui:v1
+      # Backup Fooocus
+      docker commit fooocus-app-1 fooocus:v1
       # Backup Ollama
       docker commit ollama-app-1 ollama/ollama:latest
       ```
@@ -122,6 +153,7 @@ docker compose -f compose.ollama.yaml up -d
 
 # 感谢名单以及代码来源(Credits)
 
+- [Docker](https://www.docker.com/)
 - [ComfyUI Dockerfile](https://huggingface.co/spaces/SpacesExamples/ComfyUI/tree/main)
 - [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 - [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
