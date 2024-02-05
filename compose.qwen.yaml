@@ -1,4 +1,4 @@
-name: comfyui
+name: qwen
 services:
   proxy:
     image: "tinyproxy"
@@ -15,31 +15,40 @@ services:
     depends_on:
       - app
     ports:
-      - 7861:7860
+      - 8080:80
     volumes:
-      - ./caddy.sdui.Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy.qwen.Caddyfile:/etc/caddy/Caddyfile
   app:
-    image: "comfyui:v1"
+    image: "qwenllm/qwen:cu121"
+    command:
+      - "python"
+      - "web_demo.py"
+      - "--server-port"
+      - "80"
+      - "--server-name"
+      - "0.0.0.0"
+      - "-c"
+      - "/data/shared/Qwen/Qwen-Chat/"
     networks:
       - internal
     environment:
       - http_proxy=http://proxy:8118
       - https_proxy=http://proxy:8118
       - no_proxy=localhost,127.0.0.1
-    volumes:
-      - ./data:/data:z
-      - ./models:/home/user/app/models:z
     deploy:
-#      restart_policy:
-#        condition: on-failure
-#        delay: 5s
-#        max_attempts: 3
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
       resources:
         reservations:
           devices:
             - driver: nvidia
               capabilities: [gpu]
               count: all
+    volumes:
+      - ./models/qwen:/data/shared/Qwen/Qwen-Chat:z
+
 networks:
   external:
   internal:

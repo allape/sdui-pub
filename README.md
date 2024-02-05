@@ -4,7 +4,7 @@ StableDiffusion UI in Docker
 
 ---
 
-[中文](./README.cn.md) | [English](./README.md)
+[中文](./README.cn.md) | [English]
 
 # Drivers and Tools
 
@@ -43,7 +43,14 @@ docker build -t tinyproxy:latest -f v1.tinyproxy.Dockerfile .
 
 ```shell
 docker build -t 1111webui:v1 -f v1.1111webui.Dockerfile .
+
+# CLIP models
 git clone https://huggingface.co/openai/clip-vit-large-patch14 openai/clip-vit-large-patch14
+# Suggested ControlNET models
+git clone https://huggingface.co/lllyasviel/ControlNet-v1-1 models/controlnet/ControlNet-v1-1
+# FaceID IP-Adapter models
+git clone https://huggingface.co/h94/IP-Adapter-FaceID models/controlnet/IP-Adapter-FaceID
+
 docker compose -f compose.1111webui.yaml up -d
 ```
 
@@ -59,12 +66,16 @@ docker compose -f compose.comfyui.yaml up -d
 ```shell
 docker build -t fooocus:v1 -f v1.fooocus.Dockerfile .
 
-# You can ignore below commands if you have no will to mount `models` folder,
-#   because we need a fresh models folder to run properly.
-cd ..
-git clone https://github.com/lllyasviel/Fooocus.git
-cp -R Fooocus/models sdui/fooocus/
-cd sdui
+# Get required files
+# Method 1
+#cd ..
+#git clone https://github.com/lllyasviel/Fooocus.git
+#cp -R Fooocus/models sdui/fooocus/
+#cd sdui
+# Method 2
+export TMP_FOOOCUS_CONTAINER="$(docker create fooocus:v1)"
+docker cp "$TMP_FOOOCUS_CONTAINER:/home/user/app/models" fooocus/
+docker rm -f "$TMP_FOOOCUS_CONTAINER"
 
 # --preset anime
 #export FOOOCUS_PRESET="anime"
@@ -105,28 +116,35 @@ docker compose -f compose.ollama.yaml up -d
     - For me, I failed to install `nsight-compute`. After all above steps, Everything works fine.
 - How backup container?
     - ```shell
-      # Backup AUTOMATIC1111/stable-diffusion-webui
       docker commit 1111webui-app-1 1111webui:v1
-      # Backup ComfyUI
-      docker commit comfyui-app-1 comfyui:v1
-      # Backup Fooocus
-      docker commit fooocus-app-1 fooocus:v1
-      # Backup Ollama
-      docker commit ollama-app-1 ollama/ollama:latest
+      ```
+- How backup image?
+    - ```shell
+      docker image save 1111webui:v1 -o 1111webui.v1.tar
       ```
 
 # Credits
 
 - [Docker](https://www.docker.com/)
-- [ComfyUI Dockerfile](https://huggingface.co/spaces/SpacesExamples/ComfyUI/tree/main)
-- [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
-- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
-- [Fooocus](https://github.com/lllyasviel/Fooocus)
-- [Ollama](https://github.com/ollama/ollama)
-- [tinyproxy](https://github.com/tinyproxy/tinyproxy)
 - [Caddy](https://github.com/caddyserver/caddy)
+- [tinyproxy](https://github.com/tinyproxy/tinyproxy)
+
+- [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+- [ComfyUI Dockerfile](https://huggingface.co/spaces/SpacesExamples/ComfyUI/tree/main)
+- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+- [MAT](https://huggingface.co/spaces/Rothfeld/stable-diffusion-mat-outpainting-primer/tree/main)
+- [Fooocus](https://github.com/lllyasviel/Fooocus)
+
+- [Ollama](https://github.com/ollama/ollama)
+- [Qwen](https://github.com/QwenLM/Qwen)
+
 - [notification.mp3](https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/assets/notify.mp3)
+
+- and more...
 
 ---
 
+- [HuggingFace](https://huggingface.co/)
+- [CIVITAI](https://civitai.com/)
+- [Lib Lib AI](https://www.liblib.art/)
 - [How does StableDiffusion work?](https://stable-diffusion-art.com/how-stable-diffusion-work/)

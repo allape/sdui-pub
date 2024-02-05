@@ -19,7 +19,8 @@ services:
     volumes:
       - ./caddy.sdui.Caddyfile:/etc/caddy/Caddyfile
   app:
-    image: "registry.hf.space/rothfeld-stable-diffusion-mat-outpainting-primer:latest"
+    # FIXME not working
+    # image: "registry.hf.space/rothfeld-stable-diffusion-mat-outpainting-primer:latest"
     command:
       - python
       - app.py

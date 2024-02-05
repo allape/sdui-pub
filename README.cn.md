@@ -4,7 +4,7 @@
 
 ---
 
-[English](./README.md) | [中文](./README.cn.md)
+[English](./README.md) | [中文]
 
 # 需要下载的驱动和工具
 
@@ -62,8 +62,13 @@ docker rm -f tinyproxy
 ```shell
 # 构建镜像
 docker build -t 1111webui:v1 -f v1.1111webui.Dockerfile .
-# 拉取分词模型
+
+# 拉取分词+图文模型
 git clone https://huggingface.co/openai/clip-vit-large-patch14 openai/clip-vit-large-patch14
+# 推荐使用的 ControlNET 模型
+git clone https://huggingface.co/lllyasviel/ControlNet-v1-1 models/controlnet/ControlNet-v1-1
+# FaceID IP-Adapter 模型
+git clone https://huggingface.co/h94/IP-Adapter-FaceID models/controlnet/IP-Adapter-FaceID
 
 docker compose -f compose.1111webui.yaml up -d
 ```
@@ -87,11 +92,17 @@ docker compose -f compose.comfyui.yaml up -d
 ```shell
 docker build -t fooocus:v1 -f v1.fooocus.Dockerfile .
 
-# 如果你不需要备份模型, 可以忽略下面的命令
-cd ..
-git clone https://github.com/lllyasviel/Fooocus.git
-cp -R Fooocus/models sdui/fooocus/
-cd sdui
+# 获取最新的数据
+# 方法 1
+#cd ..
+#git clone https://github.com/lllyasviel/Fooocus.git
+#cp -R Fooocus/models sdui/fooocus/
+#cd sdui
+# 方法 2
+export TMP_FOOOCUS_CONTAINER="$(docker create fooocus:v1)"
+docker cp "$TMP_FOOOCUS_CONTAINER:/home/user/app/models" fooocus/
+docker rm -f "$TMP_FOOOCUS_CONTAINER"
+
 
 # --preset anime
 #export FOOOCUS_PRESET="anime"
@@ -136,14 +147,14 @@ docker compose -f compose.ollama.yaml up -d
     - 出现类似问题的小伙伴也可以通过在`安装错误的结果页面`找到对应出错的模块, 按照上面的思路进行就好了.
 - 如何备份 Docker 容器? (因为更改配置之后重启 compose 会丢失原有容器内容)
     - ```shell
-      # Backup AUTOMATIC1111/stable-diffusion-webui
+      # 备份 `AUTOMATIC1111/stable-diffusion-webui`
       docker commit 1111webui-app-1 1111webui:v1
-      # Backup ComfyUI
-      docker commit comfyui-app-1 comfyui:v1
-      # Backup Fooocus
-      docker commit fooocus-app-1 fooocus:v1
-      # Backup Ollama
-      docker commit ollama-app-1 ollama/ollama:latest
+      ```
+- 如何备份 Docker 镜像?
+    - ```shell
+      # 导出 `AUTOMATIC1111/stable-diffusion-webui` 为 `1111webui.v1.tar`
+      docker image save 1111webui:v1 -o 1111webui.v1.tar
+      # 然后将 `1111webui.v1.tar` 放到安全的地方
       ```
 
 # 词汇表
@@ -154,15 +165,25 @@ docker compose -f compose.ollama.yaml up -d
 # 感谢名单以及代码来源(Credits)
 
 - [Docker](https://www.docker.com/)
-- [ComfyUI Dockerfile](https://huggingface.co/spaces/SpacesExamples/ComfyUI/tree/main)
-- [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
-- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
-- [Fooocus](https://github.com/lllyasviel/Fooocus)
-- [Ollama](https://github.com/ollama/ollama)
-- [tinyproxy](https://github.com/tinyproxy/tinyproxy)
 - [Caddy](https://github.com/caddyserver/caddy)
+- [tinyproxy](https://github.com/tinyproxy/tinyproxy)
+
+- [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+- [ComfyUI Dockerfile](https://huggingface.co/spaces/SpacesExamples/ComfyUI/tree/main)
+- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+- [MAT](https://huggingface.co/spaces/Rothfeld/stable-diffusion-mat-outpainting-primer/tree/main)
+- [Fooocus](https://github.com/lllyasviel/Fooocus)
+
+- [Ollama](https://github.com/ollama/ollama)
+- [Qwen](https://github.com/QwenLM/Qwen)
+
 - [notification.mp3](https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/assets/notify.mp3)
+
+- 其他更多爱心人士...
 
 ---
 
+- [HuggingFace](https://huggingface.co/)
+- [CIVITAI](https://civitai.com/)
+- [Lib Lib AI](https://www.liblib.art/)
 - [How does StableDiffusion work?](https://stable-diffusion-art.com/how-stable-diffusion-work/)
