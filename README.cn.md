@@ -118,6 +118,14 @@ export FOOOCUS_PRESET="default"
 docker compose -f compose.fooocus.yaml up -d
 ```
 
+## [Qwen](https://github.com/QwenLM/Qwen)
+
+阿里巴巴的 `通义千问`
+
+```shell
+docker compose -f compose.qwen.yaml up -d
+```
+
 ## [Ollama](https://github.com/ollama/ollama)
 
 这不是一个 SD 的工程, 但是可以用来跑大语言模型, 正好 SDUI 的基础设施可以直接搭建构建这个镜像

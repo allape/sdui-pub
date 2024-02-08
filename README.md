@@ -91,6 +91,12 @@ export FOOOCUS_PRESET="default"
 docker compose -f compose.fooocus.yaml up -d
 ```
 
+## [Qwen](https://github.com/QwenLM/Qwen)
+
+```shell
+docker compose -f compose.qwen.yaml up -d
+```
+
 ## [Ollama](https://github.com/ollama/ollama)
 
 ```shell
