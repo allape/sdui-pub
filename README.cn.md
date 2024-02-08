@@ -22,10 +22,35 @@
 
 # 如何开始
 
-## 在 Windows 上要干的事儿
+## 事前准备
 
 ```shell
-git config --global core.autocrlf false
+# 在 Windows 上要干的事儿
+#git config --global core.autocrlf false
+
+# 输出目录, 所有输出的内容都会在这个文件夹里面
+mkdir -p data
+# `Fooocus` 的模型和配置文件夹
+mkdir -p fooocus
+# `GPT-SoVITS` 的模型和配置文件夹
+mkdir gpt-sovits
+# `Ollama` 的模型和配置文件夹
+mkdir -p ollama
+# `OpenAI` `CLIP` 项目
+mkdir -p openai
+
+# 模型目录
+mkdir -p models/checkpoints
+# `LoRA` 目录
+mkdir -p models/loras
+# `embeddings` / `Textual Inversion` 目录
+mkdir -p models/embeddings
+# `VAE` 目录
+mkdir -p models/vae
+mkdir -p models/vae_approx
+
+# `Qwen` 模型目录
+mkdir -p models/qwen
 ```
 
 ## 构建一个 [tinyproxy](https://github.com/tinyproxy/tinyproxy) 镜像
@@ -64,11 +89,11 @@ docker rm -f tinyproxy
 docker build -t 1111webui:v1 -f v1.1111webui.Dockerfile .
 
 # 拉取分词+图文模型
-git clone https://huggingface.co/openai/clip-vit-large-patch14 openai/clip-vit-large-patch14
+git clone--depth 1 https://huggingface.co/openai/clip-vit-large-patch14 openai/clip-vit-large-patch14
 # 推荐使用的 ControlNET 模型
-git clone https://huggingface.co/lllyasviel/ControlNet-v1-1 models/controlnet/ControlNet-v1-1
+git clone--depth 1 https://huggingface.co/lllyasviel/ControlNet-v1-1 models/controlnet/ControlNet-v1-1
 # FaceID IP-Adapter 模型
-git clone https://huggingface.co/h94/IP-Adapter-FaceID models/controlnet/IP-Adapter-FaceID
+git clone--depth 1 https://huggingface.co/h94/IP-Adapter-FaceID models/controlnet/IP-Adapter-FaceID
 
 docker compose -f compose.1111webui.yaml up -d
 ```
@@ -95,7 +120,7 @@ docker build -t fooocus:v1 -f v1.fooocus.Dockerfile .
 # 获取最新的数据
 # 方法 1
 #cd ..
-#git clone https://github.com/lllyasviel/Fooocus.git
+#git clone --depth 1 https://github.com/lllyasviel/Fooocus.git
 #cp -R Fooocus/models sdui/fooocus/
 #cd sdui
 # 方法 2
@@ -123,6 +148,7 @@ docker compose -f compose.fooocus.yaml up -d
 阿里巴巴的 `通义千问`
 
 ```shell
+git clone --depth 1 https://huggingface.co/Qwen/Qwen-7B-Chat ./models/qwen
 docker compose -f compose.qwen.yaml up -d
 ```
 
@@ -132,6 +158,15 @@ docker compose -f compose.qwen.yaml up -d
 
 ```shell
 docker compose -f compose.ollama.yaml up -d
+```
+
+## [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)
+
+一分钟声音克隆
+
+```shell
+git clone --depth 1 https://huggingface.co/lj1995/GPT-SoVITS ./gpt-sovits/SoVITS_weights
+docker compose -f compose.gpt-sovits.yaml up -d
 ```
 
 # 常见问题
@@ -184,6 +219,9 @@ docker compose -f compose.ollama.yaml up -d
 
 - [Ollama](https://github.com/ollama/ollama)
 - [Qwen](https://github.com/QwenLM/Qwen)
+
+- [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)
+- [GPT-SoVITS/docker-compose.yaml](https://github.com/RVC-Boss/GPT-SoVITS/blob/main/docker-compose.yaml)
 
 - [notification.mp3](https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/assets/notify.mp3)
 

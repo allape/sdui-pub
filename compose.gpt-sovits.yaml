@@ -1,4 +1,4 @@
-name: qwen
+name: gpt-sovits
 services:
   proxy:
     image: "tinyproxy"
@@ -15,23 +15,26 @@ services:
     depends_on:
       - app
     ports:
-      - 8080:80
+      - "9870:9870"
+      - "9871:9871"
+      - "9872:9872"
+      - "9873:9873"
+      - "9874:9874"
     volumes:
-      - ./caddy.qwen.Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy.gpt-sovits.Caddyfile:/etc/caddy/Caddyfile
   app:
-    image: "qwenllm/qwen:cu117"
-    command:
-      - "python"
-      - "web_demo.py"
-      - "--server-port"
-      - "80"
-      - "--server-name"
-      - "0.0.0.0"
-      - "-c"
-      - "/data/shared/Qwen/Qwen-Chat/"
+    image: "breakstring/gpt-sovits:latest"
     networks:
       - internal
+    shm_size: 16G
+    working_dir: /workspace
+    volumes:
+      - ./data:/workspace/output:z
+      - ./gpt-sovits/logs:/workspace/logs:z
+      - ./gpt-sovits/SoVITS_weights:/workspace/SoVITS_weights:z
+      - ./gpt-sovits/reference:/workspace/reference:z
     environment:
+      - is_half=False
       - http_proxy=http://proxy:8118
       - https_proxy=http://proxy:8118
       - no_proxy=localhost,127.0.0.1
@@ -42,8 +45,6 @@ services:
             - driver: nvidia
               capabilities: [gpu]
               count: all
-    volumes:
-      - ./models/qwen:/data/shared/Qwen/Qwen-Chat:z
 
 networks:
   external:

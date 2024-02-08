@@ -22,11 +22,35 @@ StableDiffusion UI in Docker
 
 # Let's get started
 
-## Windows prelude
+## Prelude
 
 ```shell
 # Run this command before everything if you are using Windows
-git config --global core.autocrlf false
+#git config --global core.autocrlf false
+
+# Output folder
+mkdir -p data
+# `Fooocus` models and configs
+mkdir -p fooocus
+# `GPT-SoVITS` models and configs
+mkdir gpt-sovits
+# `Ollama` models and configs
+mkdir -p ollama
+# `OpenAI` `CLIP`
+mkdir -p openai
+
+# `Model` / `Checkpoint` folder
+mkdir -p models/checkpoints
+# `LoRA` folder
+mkdir -p models/loras
+# `embeddings` / `Textual Inversion` folder
+mkdir -p models/embeddings
+# `VAE` folder
+mkdir -p models/vae
+mkdir -p models/vae_approx
+
+# `Qwen` checkpoints
+mkdir -p models/qwen
 ```
 
 ## [tinyproxy](https://github.com/tinyproxy/tinyproxy)
@@ -45,11 +69,11 @@ docker build -t tinyproxy:latest -f v1.tinyproxy.Dockerfile .
 docker build -t 1111webui:v1 -f v1.1111webui.Dockerfile .
 
 # CLIP models
-git clone https://huggingface.co/openai/clip-vit-large-patch14 openai/clip-vit-large-patch14
+git clone --depth 1 https://huggingface.co/openai/clip-vit-large-patch14 openai/clip-vit-large-patch14
 # Suggested ControlNET models
-git clone https://huggingface.co/lllyasviel/ControlNet-v1-1 models/controlnet/ControlNet-v1-1
+git clone --depth 1 https://huggingface.co/lllyasviel/ControlNet-v1-1 models/controlnet/ControlNet-v1-1
 # FaceID IP-Adapter models
-git clone https://huggingface.co/h94/IP-Adapter-FaceID models/controlnet/IP-Adapter-FaceID
+git clone --depth 1 https://huggingface.co/h94/IP-Adapter-FaceID models/controlnet/IP-Adapter-FaceID
 
 docker compose -f compose.1111webui.yaml up -d
 ```
@@ -69,7 +93,7 @@ docker build -t fooocus:v1 -f v1.fooocus.Dockerfile .
 # Get required files
 # Method 1
 #cd ..
-#git clone https://github.com/lllyasviel/Fooocus.git
+#git clone --depth 1 https://github.com/lllyasviel/Fooocus.git
 #cp -R Fooocus/models sdui/fooocus/
 #cd sdui
 # Method 2
@@ -94,6 +118,7 @@ docker compose -f compose.fooocus.yaml up -d
 ## [Qwen](https://github.com/QwenLM/Qwen)
 
 ```shell
+git clone --depth 1 https://huggingface.co/Qwen/Qwen-7B-Chat ./models/qwen
 docker compose -f compose.qwen.yaml up -d
 ```
 
@@ -101,6 +126,13 @@ docker compose -f compose.qwen.yaml up -d
 
 ```shell
 docker compose -f compose.ollama.yaml up -d
+```
+
+## [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)
+
+```shell
+git clone --depth 1 https://huggingface.co/lj1995/GPT-SoVITS ./gpt-sovits/SoVITS_weights
+docker compose -f compose.gpt-sovits.yaml up -d
 ```
 
 # FAQ
@@ -143,6 +175,9 @@ docker compose -f compose.ollama.yaml up -d
 
 - [Ollama](https://github.com/ollama/ollama)
 - [Qwen](https://github.com/QwenLM/Qwen)
+
+- [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)
+- [GPT-SoVITS/docker-compose.yaml](https://github.com/RVC-Boss/GPT-SoVITS/blob/main/docker-compose.yaml)
 
 - [notification.mp3](https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/assets/notify.mp3)
 

@@ -1,0 +1,15 @@
+:9870 {
+    reverse_proxy app:9870
+}
+:9871 {
+    reverse_proxy app:9871
+}
+:9872 {
+    reverse_proxy app:9872
+}
+:9873 {
+    reverse_proxy app:9873
+}
+:9874 {
+    reverse_proxy app:9874
+}
