@@ -19,7 +19,7 @@ services:
     volumes:
       - ./caddy.qwen.Caddyfile:/etc/caddy/Caddyfile
   app:
-    image: "qwenllm/qwen:cu121"
+    image: "qwenllm/qwen:cu117"
     command:
       - "python"
       - "web_demo.py"
