@@ -29,15 +29,15 @@ StableDiffusion UI in Docker
 #git config --global core.autocrlf false
 
 # Output folder
-mkdir -p data
+mkdir data
 # `Fooocus` models and configs
-mkdir -p fooocus
+mkdir fooocus
 # `GPT-SoVITS` models and configs
 mkdir gpt-sovits
 # `Ollama` models and configs
-mkdir -p ollama
+mkdir ollama
 # `OpenAI` `CLIP`
-mkdir -p openai
+mkdir openai
 
 # `Model` / `Checkpoint` folder
 mkdir -p models/checkpoints

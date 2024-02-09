@@ -29,15 +29,15 @@
 #git config --global core.autocrlf false
 
 # 输出目录, 所有输出的内容都会在这个文件夹里面
-mkdir -p data
+mkdir data
 # `Fooocus` 的模型和配置文件夹
-mkdir -p fooocus
+mkdir fooocus
 # `GPT-SoVITS` 的模型和配置文件夹
 mkdir gpt-sovits
 # `Ollama` 的模型和配置文件夹
-mkdir -p ollama
+mkdir ollama
 # `OpenAI` `CLIP` 项目
-mkdir -p openai
+mkdir openai
 
 # 模型目录
 mkdir -p models/checkpoints
