@@ -210,6 +210,7 @@ docker compose -f compose.gpt-sovits.yaml up -d
 - [Docker](https://www.docker.com/)
 - [Caddy](https://github.com/caddyserver/caddy)
 - [tinyproxy](https://github.com/tinyproxy/tinyproxy)
+- [dufs](https://github.com/sigoden/dufs)
 
 - [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 - [ComfyUI Dockerfile](https://huggingface.co/spaces/SpacesExamples/ComfyUI/tree/main)
@@ -218,6 +219,7 @@ docker compose -f compose.gpt-sovits.yaml up -d
 - [Fooocus](https://github.com/lllyasviel/Fooocus)
 
 - [Ollama](https://github.com/ollama/ollama)
+- [ollama-webui](https://github.com/ollama-webui/ollama-webui)
 - [Qwen](https://github.com/QwenLM/Qwen)
 
 - [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)

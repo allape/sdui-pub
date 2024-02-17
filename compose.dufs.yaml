@@ -1,0 +1,11 @@
+name: dufs
+services:
+  app:
+    image: "sigoden/dufs"
+    ports:
+      - 5000:5000
+    command:
+      - /data
+      - -A
+    volumes:
+      - ./data:/data
