@@ -9,3 +9,4 @@ services:
       - -A
     volumes:
       - ./data:/data
+    restart: always
