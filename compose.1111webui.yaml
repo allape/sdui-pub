@@ -45,10 +45,10 @@ services:
       - ./openai:/home/user/app/openai:z
       - ./styles.csv:/home/user/app/styles.csv:rw
     deploy:
-#      restart_policy:
-#        condition: on-failure
-#        delay: 5s
-#        max_attempts: 3
+      restart_policy:
+        condition: unless-stopped
+        delay: 5s
+        max_attempts: 3
       resources:
         reservations:
           devices:
