@@ -9,6 +9,7 @@ services:
       - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf
   http:
     image: "caddy"
+    restart: unless-stopped
     networks:
       - external
       - internal
@@ -20,6 +21,7 @@ services:
       - ./caddy.sdui.Caddyfile:/etc/caddy/Caddyfile
   app:
     image: "1111webui:v1"
+    restart: unless-stopped
     networks:
       - internal
     environment:
@@ -45,10 +47,6 @@ services:
       - ./openai:/home/user/app/openai:z
       - ./styles.csv:/home/user/app/styles.csv:rw
     deploy:
-      restart_policy:
-        condition: unless-stopped
-        delay: 5s
-        max_attempts: 3
       resources:
         reservations:
           devices:
