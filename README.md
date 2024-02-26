@@ -13,10 +13,9 @@ StableDiffusion UI in Docker
 - [WSL](https://learn.microsoft.com/en-us/windows/wsl/basic-commands)
 - [Download Git](https://git-scm.com/downloads)
 
-# My Poor Gears
+# My Gears
 
 - Intel Core i7-8700K
-- NVIDIA GeForce GTX 1060 6GB
 - NVIDIA GeForce RTX 4070 SUPER
 - 32GB DDR4 3200MHz
 
