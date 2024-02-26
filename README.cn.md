@@ -219,7 +219,7 @@ docker compose -f compose.gpt-sovits.yaml up -d
 - [Fooocus](https://github.com/lllyasviel/Fooocus)
 
 - [Ollama](https://github.com/ollama/ollama)
-- [ollama-webui](https://github.com/ollama-webui/ollama-webui)
+- [open-webui](https://github.com/open-webui/open-webui)
 - [Qwen](https://github.com/QwenLM/Qwen)
 
 - [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)
