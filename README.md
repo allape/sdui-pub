@@ -117,7 +117,8 @@ docker compose -f compose.fooocus.yaml up -d
 ## [Qwen](https://github.com/QwenLM/Qwen)
 
 ```shell
-git clone --depth 1 https://huggingface.co/Qwen/Qwen-7B-Chat ./models/qwen
+#git clone --depth 1 https://huggingface.co/Qwen/Qwen-7B-Chat ./models/qwen/7b-chat
+git clone --depth 1 https://huggingface.co/Qwen/Qwen-1_8B-Chat ./models/qwen/1.8b-chat
 docker compose -f compose.qwen.yaml up -d
 ```
 

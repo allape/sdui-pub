@@ -43,7 +43,7 @@ services:
               capabilities: [gpu]
               count: all
     volumes:
-      - ./models/qwen:/data/shared/Qwen/Qwen-Chat:z
+      - ./models/qwen/1.8b-chat:/data/shared/Qwen/Qwen-Chat:z
 
 networks:
   external:
