@@ -51,6 +51,9 @@ services:
       - app
     environment:
       - OLLAMA_API_BASE_URL=http://app:11434/api
+      - http_proxy=http://proxy:8118
+      - https_proxy=http://proxy:8118
+      - no_proxy=localhost,127.0.0.1,app
     volumes:
       - ./ollama/webui:/app/backend/data:z
 
