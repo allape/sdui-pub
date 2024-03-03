@@ -114,6 +114,14 @@ export FOOOCUS_PRESET="default"
 docker compose -f compose.fooocus.yaml up -d
 ```
 
+## [Ollama](https://github.com/ollama/ollama)
+
+Supported models:
+- [Gemma](https://www.kaggle.com/models/google/gemma)
+- [Llama 2](https://arxiv.org/abs/2307.09288)
+- [llama2-uncensored](https://erichartford.com/uncensored-models)
+- [qwen](https://github.com/QwenLM/Qwen)
+
 ## [Qwen](https://github.com/QwenLM/Qwen)
 
 ```shell
@@ -121,8 +129,6 @@ docker compose -f compose.fooocus.yaml up -d
 git clone --depth 1 https://huggingface.co/Qwen/Qwen-1_8B-Chat ./models/qwen/1.8b-chat
 docker compose -f compose.qwen.yaml up -d
 ```
-
-## [Ollama](https://github.com/ollama/ollama)
 
 ```shell
 docker compose -f compose.ollama.yaml up -d

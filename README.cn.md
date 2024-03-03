@@ -142,22 +142,28 @@ export FOOOCUS_PRESET="default"
 docker compose -f compose.fooocus.yaml up -d
 ```
 
+## [Ollama](https://github.com/ollama/ollama)
+
+这不是一个 SD 的工程, 但是可以用来跑大语言模型, 正好 SDUI 的基础设施可以直接搭建构建这个镜像.
+
+支持的模型:
+- [Gemma](https://www.kaggle.com/models/google/gemma)
+- [Llama 2](https://arxiv.org/abs/2307.09288)
+- [llama2-uncensored](https://erichartford.com/uncensored-models)
+- [qwen](https://github.com/QwenLM/Qwen)
+
+```shell
+docker compose -f compose.ollama.yaml up -d
+```
+
 ## [Qwen](https://github.com/QwenLM/Qwen)
 
-阿里巴巴的 `通义千问`
+阿里巴巴的 `通义千问` 官方 demo
 
 ```shell
 #git clone --depth 1 https://huggingface.co/Qwen/Qwen-7B-Chat ./models/qwen/7b-chat
 git clone --depth 1 https://huggingface.co/Qwen/Qwen-1_8B-Chat ./models/qwen/1.8b-chat
 docker compose -f compose.qwen.yaml up -d
-```
-
-## [Ollama](https://github.com/ollama/ollama)
-
-这不是一个 SD 的工程, 但是可以用来跑大语言模型, 正好 SDUI 的基础设施可以直接搭建构建这个镜像
-
-```shell
-docker compose -f compose.ollama.yaml up -d
 ```
 
 ## [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)
