@@ -141,6 +141,13 @@ git clone --depth 1 https://huggingface.co/lj1995/GPT-SoVITS ./gpt-sovits/SoVITS
 docker compose -f compose.gpt-sovits.yaml up -d
 ```
 
+## [easyocr](https://github.com/JaidedAI/EasyOCR)
+
+```shell
+docker build -t easyocr:v1 -f v1.easyocr.Dockerfile .
+docker compose -f compose.easyocr.yaml up -d
+```
+
 # FAQ
 
 - How to use proxy for image building progress?
@@ -186,6 +193,8 @@ docker compose -f compose.gpt-sovits.yaml up -d
 
 - [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)
 - [GPT-SoVITS/docker-compose.yaml](https://github.com/RVC-Boss/GPT-SoVITS/blob/main/docker-compose.yaml)
+
+- [easyocr](https://github.com/JaidedAI/EasyOCR)
 
 - [notification.mp3](https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/assets/notify.mp3)
 

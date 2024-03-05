@@ -1,0 +1,3 @@
+:7860 {
+    reverse_proxy http://app:7860
+}
