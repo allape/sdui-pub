@@ -30,6 +30,7 @@ services:
       - no_proxy=localhost,127.0.0.1
       - GRADIO_SERVER_NAME=0.0.0.0
       - GRADIO_SERVER_PORT=7860
+      - EASYOCR_ALLOWED_LANGS=
     volumes:
       - ./models/easyocr:/root/.EasyOCR/model:z
       - ./easyocr/app.py:/app/app.py:z

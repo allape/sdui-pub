@@ -32,7 +32,6 @@ WORKDIR /app
 #    git config --global --unset https.proxy
 
 RUN python -m pip install \
-    pandas \
     "opencv-python-headless<4.3" \
     Pillow \
     gradio \
