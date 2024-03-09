@@ -122,16 +122,16 @@ Supported models:
 - [llama2-uncensored](https://erichartford.com/uncensored-models)
 - [qwen](https://github.com/QwenLM/Qwen)
 
+```shell
+docker compose -f compose.ollama.yaml up -d
+```
+
 ## [Qwen](https://github.com/QwenLM/Qwen)
 
 ```shell
 #git clone --depth 1 https://huggingface.co/Qwen/Qwen-7B-Chat ./models/qwen/7b-chat
 git clone --depth 1 https://huggingface.co/Qwen/Qwen-1_8B-Chat ./models/qwen/1.8b-chat
 docker compose -f compose.qwen.yaml up -d
-```
-
-```shell
-docker compose -f compose.ollama.yaml up -d
 ```
 
 ## [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)

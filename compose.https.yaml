@@ -1,0 +1,10 @@
+name: https
+services:
+  app:
+    image: "caddy"
+    restart: unless-stopped
+    ports:
+      - 443:443
+    volumes:
+      - ./certs:/etc/ssl/certs
+      - ./caddy.https.Caddyfile:/etc/caddy/Caddyfile
