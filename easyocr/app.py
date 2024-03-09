@@ -10,7 +10,7 @@
 # EASYOCR_THRESHOLD: set to the threshold for the confidence level
 
 import os
-from typing import List, Tuple
+from typing import List
 
 import easyocr
 import gradio as gr
@@ -153,6 +153,7 @@ default_lang_set = format_langs_from_env("EASYOCR_DEFAULT_LANGS", [])
 default_langs = []
 for i in default_lang_set:
     default_langs.append(i[1])
+
 
 # endregion
 
