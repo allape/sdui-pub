@@ -10,6 +10,7 @@
 # EASYOCR_THRESHOLD: set to the threshold for the confidence level
 
 import os
+import time
 from typing import List
 
 import easyocr
@@ -157,15 +158,28 @@ for i in default_lang_set:
 
 # endregion
 
+cached_reader = {}
+if len(default_langs) > 0:
+    print('Initializing default reader...')
+    cached_reader[','.join(default_langs)] = easyocr.Reader(default_langs)
+
 
 def inference(img: str, languages: List[str]):
     if not img:
         return []
 
-    # set threshold for easyocr
+    reader_key = ','.join(languages)
+    if reader_key not in cached_reader:
+        start = time.time()
+        cached_reader[reader_key] = easyocr.Reader(languages)
+        print('Reader Initialization takes', time.time() - start, 's')
+    reader = cached_reader[reader_key]
 
-    reader = easyocr.Reader(languages)
+    start = time.time()
     bounds = reader.readtext(img)
+    print('Prediction takes', time.time() - start, 's')
+
+    start = time.time()
     im = Image.open(img)
 
     dataframe = []
@@ -181,8 +195,10 @@ def inference(img: str, languages: List[str]):
             "%.2f%%" % (bound[2] * 100),
         ])
 
-    image_filepath = os.path.join(output_folder, "result.jpg")
+    image_filepath = os.path.join(output_folder, "result.jpg")  # dynamically change the file name?
     im.save(image_filepath)
+
+    print('Postprocess takes', time.time() - start, 's')
 
     return [image_filepath, dataframe]
 
@@ -212,6 +228,7 @@ css = """
             border: 2px solid yellow;
             background-color: aqua;
             opacity: 1;
+            z-index: 1001;
             &.dim {
                 animation-name: BoxerFadeOut;
                 animation-duration: 0.5s;

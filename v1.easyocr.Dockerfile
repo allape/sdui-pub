@@ -40,4 +40,4 @@ RUN python -m pip install \
 
 COPY easyocr/app.py .
 
-CMD ["python", "app.py"]
+CMD ["python", "-u", "app.py"]
