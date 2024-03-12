@@ -210,6 +210,32 @@ css = """
     width: 100% !important;
 }
 
+/* region reflow the ui */
+.main {
+    /* input-output container */
+    .contain > div > div:last-child {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        & > div {
+            width: 100%;
+        }
+        /* output container */
+        & > div:last-child {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            & > div:last-child {
+                flex: 1 0 100%;
+            }
+        }
+    }
+}
+#OutputImage, #OutputDataframe {
+    flex: 1 0 calc(min(50%, 320px) - var(--layout-gap));
+    min-width: 320px;
+}
+/* endregion */
+
 @keyframes BoxerFadeOut {
     to {
         opacity: 0;
@@ -228,7 +254,6 @@ css = """
             border: 2px solid yellow;
             background-color: aqua;
             opacity: 1;
-            z-index: 1001;
             &.dim {
                 animation-name: BoxerFadeOut;
                 animation-duration: 0.5s;
@@ -347,7 +372,7 @@ gr.Interface(
         gr.CheckboxGroup(allowed_lang_set, type="value", value=default_langs, label="language"),
     ],
     [
-        gr.Image(type="filepath", label="Output", elem_id="OutputImage"),
+        gr.Image(type="filepath", label="Output", elem_id="OutputImage", show_label=False),
         gr.Dataframe(headers=["coordinate", "text", "confidence"], elem_id="OutputDataframe"),
     ],
     title=title,
