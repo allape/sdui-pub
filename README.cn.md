@@ -194,7 +194,7 @@ docker compose -f compose.easyocr.yaml up -d
              --build-arg no_proxy=localhost,127.0.0.1 \
              --progress=plain \
              -t image:tag -f Dockerfile .
-    ```
+      ```
 - 英伟达 CUDA 驱动安装失败
     - 可能因为我的显卡比较老了, 安装 CUDA 的时候提示 nsight compute 什么什么的安装失败了.
       所以在安装 CUDA 的时候, 选择自定义安装, 然后取消勾选 nsight compute, 先把 CUDA 其他模块安装完成.
