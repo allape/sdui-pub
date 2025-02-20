@@ -19,12 +19,10 @@ services:
       - app
       - webui
     ports:
-      - 11434:11434
-      - 11435:11435
+      - "11434:11434"
+      - "11435:11435"
     volumes:
       - ./caddy.ollama.Caddyfile:/etc/caddy/Caddyfile
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
   app:
     image: "ollama/ollama"
     restart: unless-stopped
