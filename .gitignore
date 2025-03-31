@@ -1,13 +1,2 @@
 .idea
 .vscode
-
-/models
-/openai
-/data
-/fooocus
-/ollama
-/gpt-sovits
-
-/styles.csv
-
-/certs

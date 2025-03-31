@@ -1,0 +1,30 @@
+name: gpt-sovits
+services:
+  app:
+    image: "breakstring/gpt-sovits:latest"
+    restart: unless-stopped
+    shm_size: 16G
+    working_dir: /workspace
+    volumes:
+      - ./data:/workspace/output:z
+      - ./gpt-sovits/logs:/workspace/logs:z
+      - ./gpt-sovits/SoVITS_weights:/workspace/SoVITS_weights:z
+      - ./gpt-sovits/reference:/workspace/reference:z
+    ports:
+      - "9870:9870"
+      - "9871:9871"
+      - "9872:9872"
+      - "9873:9873"
+      - "9874:9874"
+    environment:
+      - is_half=False
+      #- http_proxy=http://host.docker.internal:1080
+      #- https_proxy=http://host.docker.internal:1080
+      - no_proxy=localhost,127.0.0.1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+              count: all

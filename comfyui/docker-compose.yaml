@@ -1,0 +1,21 @@
+name: comfyui
+services:
+  app:
+    image: "comfyui:v1"
+    restart: unless-stopped
+    environment:
+      #- http_proxy=http://host.docker.internal:1080
+      #- https_proxy=http://host.docker.internal:1080
+      - no_proxy=localhost,127.0.0.1
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./data:/data:z
+      - ./models:/home/user/app/models:z
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+              count: all

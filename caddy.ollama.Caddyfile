@@ -1,7 +1,0 @@
-:11434 {
-    reverse_proxy app:11434
-}
-
-:11435 {
-    reverse_proxy webui:8080
-}

@@ -1,0 +1,25 @@
+name: easyocr
+services:
+  app:
+    image: "easyocr:v1"
+    restart: unless-stopped
+    environment:
+      #- http_proxy=http://host.docker.internal:1080
+      #- https_proxy=http://host.docker.internal:1080
+      - no_proxy=localhost,127.0.0.1
+      - GRADIO_SERVER_NAME=0.0.0.0
+      - GRADIO_SERVER_PORT=7860
+      - EASYOCR_ALLOWED_LANGS=
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./data:/app/outputs:z
+      - ./easyocr/app.py:/app/app.py:z
+      - ./models/easyocr:/root/.EasyOCR/model:z
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+              count: all

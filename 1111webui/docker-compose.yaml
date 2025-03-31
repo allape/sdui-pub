@@ -1,37 +1,14 @@
 name: 1111webui
 services:
-  proxy:
-    image: "tinyproxy"
-    networks:
-      - external
-      - internal
-    volumes:
-      - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-  http:
-    image: "caddy"
-    restart: unless-stopped
-    networks:
-      - external
-      - internal
-    depends_on:
-      - app
-    ports:
-      - 7860:7860
-    volumes:
-      - ./caddy.sdui.Caddyfile:/etc/caddy/Caddyfile
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
   app:
     image: "1111webui:v1"
     restart: unless-stopped
-    networks:
-      - internal
     environment:
-      - http_proxy=http://proxy:8118
-      - https_proxy=http://proxy:8118
+      #- http_proxy=http://host.docker.internal:1080
+      #- https_proxy=http://host.docker.internal:1080
       - no_proxy=localhost,127.0.0.1
+    ports:
+      - "7860:7860"
     volumes:
       # static asset
       - ./notification.mp3:/home/user/app/notification.mp3
@@ -51,6 +28,7 @@ services:
       - ./models/configs:/home/user/app/configs:z
       # control net
       - ./models/controlnet:/home/user/app/extensions/sd-webui-controlnet/models:z
+      #      - ./models/controlnet-annotator:/home/user/app/extensions/sd-webui-controlnet/annotator/downloads:z
       # output
       - ./data:/home/user/app/outputs:z
       # clip
@@ -62,9 +40,5 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              capabilities: [gpu]
+              capabilities: [ gpu ]
               count: all
-networks:
-  external:
-  internal:
-    internal: true

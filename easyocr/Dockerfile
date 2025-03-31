@@ -38,6 +38,6 @@ RUN python -m pip install \
     torch \
     easyocr
 
-COPY easyocr/app.py .
+COPY app.py .
 
 CMD ["python", "-u", "app.py"]

@@ -1,4 +1,0 @@
-:443 {
-    tls /etc/ssl/certs/ssl.crt /etc/ssl/certs/ssl.key
-    reverse_proxy http://host.docker.internal:7860
-}

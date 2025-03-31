@@ -1,0 +1,35 @@
+name: ollama
+services:
+  app:
+    image: "ollama/ollama"
+    restart: unless-stopped
+    environment:
+      #- http_proxy=http://host.docker.internal:1080
+      #- https_proxy=http://host.docker.internal:1080
+      - no_proxy=localhost,127.0.0.1,0.0.0.0,app,webui,::1
+    volumes:
+      - ./ollama/app:/root/.ollama:z
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+              count: all
+  webui:
+    image: "ghcr.io/open-webui/open-webui:main"
+    restart: unless-stopped
+    links:
+      - app
+    depends_on:
+      - app
+    environment:
+      - OLLAMA_BASE_URL=http://app:11434
+      #- http_proxy=http://host.docker.internal:1080
+      #- https_proxy=http://host.docker.internal:1080
+      - no_proxy=localhost,127.0.0.1,0.0.0.0,app,webui,::1
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./ollama/webui:/app/backend/data:z
+
