@@ -63,6 +63,7 @@ func main() {
 
 	if Cors {
 		engine.Use(cors.Default())
+		l.Warn().Printf("CORS enabled")
 	}
 
 	engine.PUT("/:language/*filename", func(context *gin.Context) {
