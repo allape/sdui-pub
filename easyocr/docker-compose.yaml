@@ -1,7 +1,7 @@
 name: easyocr
 services:
   app:
-    image: "easyocr:v1"
+    image: "allape/easyocr:latest"
     restart: unless-stopped
     environment:
       #- http_proxy=http://host.docker.internal:1080

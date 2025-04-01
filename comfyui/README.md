@@ -1,6 +1,6 @@
 ## [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
 
 ```shell
-docker build -t comfyui:v1 .
+docker build -t allape/comfyui:latest .
 docker compose up -d
 ```

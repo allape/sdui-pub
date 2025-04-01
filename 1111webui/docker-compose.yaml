@@ -1,7 +1,7 @@
 name: 1111webui
 services:
   app:
-    image: "1111webui:v1"
+    image: "allape/1111webui:latest"
     restart: unless-stopped
     environment:
       #- http_proxy=http://host.docker.internal:1080

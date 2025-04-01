@@ -8,7 +8,7 @@ mkdir -p models/vae
 mkdir -p models/vae_approx
 mkdir -p openai
 
-docker build -t 1111webui:v1 .
+docker build -t allape/1111webui:latest .
 
 # CLIP models
 git clone --depth 1 https://huggingface.co/openai/clip-vit-large-patch14 openai/clip-vit-large-patch14
