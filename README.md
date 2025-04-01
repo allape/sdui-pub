@@ -1,6 +1,6 @@
 # SDUI
 
-StableDiffusion UI in Docker
+`StableDiffusion UI` in Docker, but now, this is a note repo for all AI-related projects.
 
 # FAQ
 
