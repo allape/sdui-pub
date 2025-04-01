@@ -60,6 +60,8 @@
 
 - [YOLO](https://github.com/ultralytics/ultralytics)
 
+- [whisper.cpp](https://github.com/ggerganov/whisper.cpp)
+
 - [notification.mp3](https://github.com/pythongosssss/ComfyUI-Custom-Scripts/blob/main/web/js/assets/notify.mp3)
 
 - and more...
