@@ -51,13 +51,6 @@ func main() {
 			l.Error().Printf("failed to close model: %v", err)
 		}
 	}()
-	modelContext, err := model.NewContext()
-	if err != nil {
-		l.Error().Fatalf("failed to create model context: %v", err)
-	}
-	//modelContext.SetMaxSegmentLength(1)
-
-	locker := sync.Mutex{}
 
 	engine := gin.Default()
 
@@ -66,9 +59,18 @@ func main() {
 		l.Warn().Printf("CORS enabled")
 	}
 
+	locker := sync.Mutex{}
 	engine.PUT("/:language/*filename", func(context *gin.Context) {
 		locker.Lock()
 		defer locker.Unlock()
+
+		modelContext, err := model.NewContext()
+		if err != nil {
+			l.Error().Printf("failed to create model context: %v", err)
+			context.String(http.StatusInternalServerError, "model context error")
+			return
+		}
+		//modelContext.SetMaxSegmentLength(1)
 
 		language := context.Param("language")
 
@@ -186,5 +188,5 @@ func main() {
 
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
-	l.Info().Println("Exiting with", <-sigs)
+	l.Info().Println("exiting with", <-sigs)
 }
