@@ -17,4 +17,10 @@ RUN mkdir -p checkpoint && cd checkpoint \
     && curl -Lv -O "$CKPT_URL" \
     && curl -Lv -O "$PT_URL"
 
+COPY setup.py .
+RUN python3 setup.py
+
 COPY inference.py .
+EXPOSE 9090
+#CMD ["python3", "inference.py"]
+CMD ["conda", "run", "-n", "AudioSep", "python3", "inference.py"]
