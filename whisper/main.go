@@ -30,8 +30,20 @@ const (
 	whisperCors      = "WHISPER_CORS"
 )
 
+// models/ggml-tiny.en.bin
+// models/ggml-tiny.bin
+// models/ggml-base.en.bin
+// models/ggml-base.bin
+// models/ggml-small.en.bin
+// models/ggml-small.bin
+// models/ggml-medium.en.bin
+// models/ggml-medium.bin
+// models/ggml-large-v1.bin
+// models/ggml-large-v2.bin
+// models/ggml-large-v3.bin
+// models/ggml-large-v3-turbo.bin
 var (
-	ModelPath = goenv.Getenv(whisperModelPath, "models/ggml-base.bin")
+	ModelPath = goenv.Getenv(whisperModelPath, "models/ggml-medium.bin")
 	Addr      = goenv.Getenv(whisperAddr, ":9090")
 	Cors      = goenv.Getenv(whisperCors, false)
 )

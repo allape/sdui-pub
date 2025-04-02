@@ -20,7 +20,7 @@ ENV CUDA_MAIN_VERSION=12.3
 ENV LD_LIBRARY_PATH="/usr/local/cuda-${CUDA_MAIN_VERSION}/compat:$LD_LIBRARY_PATH"
 
 RUN git clone --depth=1 "https://github.com/ggerganov/whisper.cpp.git" .
-RUN make base.en
+RUN cmake -B build -DGGML_CUDA=1 && cmake --build build -j --config Release
 
 WORKDIR /tmp
 
