@@ -7,10 +7,8 @@ services:
       #- http_proxy=http://host.docker.internal:1080
       #- https_proxy=http://host.docker.internal:1080
       - no_proxy=localhost,127.0.0.1
-      - GGML_CUDA=1
       - WHISPER_MODEL_PATH=/models/ggml-medium.bin
       - WHISPER_CORS=1
-      - GGML_CUDA=1
     ports:
       - "9090:9090"
     volumes:
