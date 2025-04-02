@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/allape/goenv"
 	"github.com/allape/gogger"
 	"github.com/ggerganov/whisper.cpp/bindings/go/pkg/whisper"
@@ -82,7 +81,6 @@ func main() {
 			context.String(http.StatusInternalServerError, "model context error")
 			return
 		}
-		//modelContext.SetMaxSegmentLength(1)
 
 		language := context.Param("language")
 
@@ -162,6 +160,8 @@ func main() {
 			samples = append(samples, buf.AsFloat32Buffer().Data...)
 		}
 
+		modelContext.SetMaxSegmentLength(1)
+		modelContext.SetTokenTimestamps(true)
 		if err := modelContext.Process(samples, nil, nil, nil); err != nil {
 			l.Error().Printf("failed to process samples: %v", err)
 			context.String(http.StatusInternalServerError, "process error")
@@ -180,7 +180,9 @@ func main() {
 					break
 				}
 			}
-			fmt.Printf("[%6s->%6s] %s\n", segment.Start, segment.End, segment.Text)
+
+			l.Debug().Printf("[%6s->%6s] %s", segment.Start, segment.End, segment.Text)
+
 			syllables = append(syllables, Syllable{
 				Start: uint64(segment.Start.Milliseconds()),
 				End:   uint64(segment.End.Milliseconds()),
