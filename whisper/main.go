@@ -82,8 +82,13 @@ func main() {
 			return
 		}
 
-		language := context.Param("language")
+		wordLevel := context.Query("wordLevel") != ""
+		if wordLevel {
+			modelContext.SetMaxSegmentLength(1)
+			modelContext.SetTokenTimestamps(true)
+		}
 
+		language := context.Param("language")
 		err = modelContext.SetLanguage(language)
 		if err != nil {
 			l.Error().Printf("failed to set language: %v", err)
@@ -160,8 +165,6 @@ func main() {
 			samples = append(samples, buf.AsFloat32Buffer().Data...)
 		}
 
-		modelContext.SetMaxSegmentLength(1)
-		modelContext.SetTokenTimestamps(true)
 		if err := modelContext.Process(samples, nil, nil, nil); err != nil {
 			l.Error().Printf("failed to process samples: %v", err)
 			context.String(http.StatusInternalServerError, "process error")
